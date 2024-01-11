@@ -15,7 +15,7 @@ export const formatTimeIso = (value, type) => {
   if (type === DMY_HMS) {
     return `${day}-${month}-${year} || ${hours}:${minutes}:${seconds}`;
   } else if (type === DMY) {
-    return `${day}-${month}-${year} `;
+    return `${day}-${month}-${year}`;
   } else if (type === MY) {
     return `${month}-${year}`;
   }

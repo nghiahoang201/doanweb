@@ -26,7 +26,11 @@ import SnackBar from "../../../helpek/SnackBar";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import AnOrder from "./AnOrder";
 import { updateClock } from "../../../store/saga/watchClockSaga";
-import { createStatistics } from "../../../store/saga/watchStatisticsSaga";
+import {
+  createStatistics,
+  updateStatistics,
+} from "../../../store/saga/watchStatisticsSaga";
+import { getAllStatistics } from "../../../store/action/statistics";
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -66,6 +70,7 @@ const Order = () => {
   const { customers, customer, loadingCustomer } = useSelector(
     (state) => state.watchCustomerReducer
   );
+  const { statisticss } = useSelector((state) => state.watchStatisticsReducer);
   const [snack, setSnack] = useState({
     open: false,
     error: false,
@@ -80,6 +85,32 @@ const Order = () => {
       dispatch(getAnCustomer(id));
     }
   }, [dispatch, path, id]);
+
+  const getDay = () => {
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${day}-${month}-${year}`;
+  };
+  const handleCheckDay = async (item) => {
+    const statisticsEx = statisticss.find((item) => item?.dayDate === getDay());
+    if (statisticsEx) {
+      await updateStatistics({
+        ...statisticsEx,
+        quantity: statisticsEx.quantity + 1,
+        totalPrice: statisticsEx?.totalPrice + item?.totalPrice,
+      });
+    } else {
+      await createStatistics({
+        dayDate: getDay(),
+        quantity: 1,
+        totalPrice: item?.totalPrice,
+      });
+    }
+  };
   const handleDeleteCustomer = async (customer) => {
     try {
       if (window.confirm("Bạn có chắc muốn xóa khách hàng này?")) {
@@ -143,8 +174,9 @@ const Order = () => {
           successfulDelivery: true,
         });
         if (response.status === 200) {
+          dispatch(getAllStatistics());
           dispatch(getAllCustomer());
-          await createStatistics(item);
+          handleCheckDay(item);
           setSnack({
             open: true,
             error: false,
