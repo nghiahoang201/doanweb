@@ -61,7 +61,6 @@ const SliderAdmin = () => {
   );
   const match = useRouteMatch();
   const { key, id } = match.params;
-  const path = window.location.href;
   const initialValue = {
     image: "",
     preTitle: "",
@@ -76,14 +75,12 @@ const SliderAdmin = () => {
   });
 
   useEffect(() => {
-    if (path === "http://localhost:3000/admin/banner/home") {
-      dispatch(getBannerReq());
-    }
+    dispatch(getBannerReq());
     if (id) {
       dispatch(getAnBannerReq(id));
     }
     return;
-  }, [dispatch, id, path]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (Object.keys(banner).length !== 0) {

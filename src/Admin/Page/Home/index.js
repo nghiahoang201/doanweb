@@ -51,7 +51,6 @@ const Home = () => {
   const [hideCalendar, setHideCalendar] = useState(false);
   const [statisticsMonth, setStatisticsMonth] = useState([]);
   const [selectDate, setSelectDate] = useState("");
-  const path = window.location.href;
   const getDay = (type) => {
     const date = new Date();
 
@@ -65,10 +64,8 @@ const Home = () => {
     }
   };
   useEffect(() => {
-    if (path === "http://localhost:3000/admin") {
-      dispatch(getAllStatistics());
-    }
-  }, [path, dispatch]);
+    dispatch(getAllStatistics());
+  }, [dispatch]);
 
   const OrderIn = useCallback(
     (type) => {
