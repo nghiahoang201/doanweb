@@ -29,7 +29,6 @@ const useStyle = makeStyles(() =>
 const Home = () => {
   const classes = useStyle();
   const { handleAddProductCart } = useContext(ValueContext);
-  const path = window.location.href;
   const dispatch = useDispatch();
   const match = useRouteMatch();
   const { key, id } = match.params;
@@ -42,15 +41,14 @@ const Home = () => {
   );
 
   useEffect(() => {
-    if (path === "http://localhost:3000/") {
-      dispatch(getBannerReq());
-      dispatch(getClockReq());
-    }
+    dispatch(getBannerReq());
+    dispatch(getClockReq());
+
     if (id) {
       dispatch(getAnClockReq(id));
     }
     window.scrollTo(0, 0);
-  }, [dispatch, path, id]);
+  }, [dispatch, id]);
 
   switch (match.path) {
     case paths.home:

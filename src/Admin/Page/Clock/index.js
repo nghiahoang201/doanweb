@@ -74,7 +74,6 @@ const Clock = () => {
     fontSize: "20px",
     cursor: "pointer",
   };
-  const path = window.location.href;
   const initialValue = {
     image: "",
     name: "",
@@ -100,18 +99,15 @@ const Clock = () => {
     message: "",
   });
   useEffect(() => {
-    if (path === "http://localhost:3000/admin/clock/create") {
-      dispatch(getBrandReq());
-    }
-    if (path === "http://localhost:3000/admin/clock/home") {
-      dispatch(getClockReq());
-    }
+    dispatch(getBrandReq());
+    dispatch(getClockReq());
+
     if (id) {
       dispatch(getAnClockReq(id));
       dispatch(getBrandReq());
     }
     return;
-  }, [dispatch, id, path]);
+  }, [dispatch, id]);
   useEffect(() => {
     if (Object.keys(clock).length !== 0) {
       setValue(clock);

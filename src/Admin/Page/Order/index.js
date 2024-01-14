@@ -76,15 +76,14 @@ const Order = () => {
     error: false,
     message: "",
   });
-  const path = window.location.href;
+
   useEffect(() => {
-    if (path === "http://localhost:3000/admin/order/home") {
-      dispatch(getAllCustomer());
-    }
+    dispatch(getAllCustomer());
+
     if (id) {
       dispatch(getAnCustomer(id));
     }
-  }, [dispatch, path, id]);
+  }, [dispatch, id]);
 
   const getDay = () => {
     const date = new Date();

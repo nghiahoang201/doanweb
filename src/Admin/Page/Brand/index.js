@@ -72,7 +72,7 @@ const Brand = () => {
     fontSize: "20px",
     cursor: "pointer",
   };
-  const path = window.location.href;
+
   const initialValue = {
     image: "",
     banner: "",
@@ -87,14 +87,12 @@ const Brand = () => {
     message: "",
   });
   useEffect(() => {
-    if (path === "http://localhost:3000/admin/brand/home") {
-      dispatch(getBrandReq());
-    }
+    dispatch(getBrandReq());
     if (id) {
       dispatch(getAnBrandReq(id));
     }
     return;
-  }, [dispatch, id, path]);
+  }, [dispatch, id]);
   useEffect(() => {
     if (Object.keys(brand).length !== 0) {
       setValue(brand);
