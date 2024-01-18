@@ -11,6 +11,8 @@ import {
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCustomer } from "../../store/action/customerAction";
+import { getBrandReq } from "../../store/action/brandAction";
+import { getClockReq } from "../../store/action/clockAction";
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -95,7 +97,10 @@ const Navbar = () => {
         </Box>
         <Box
           className={classes.box}
-          onClick={() => history.push("/admin/brand/home")}
+          onClick={() => {
+            history.push("/admin/brand/home");
+            dispatch(getBrandReq());
+          }}
         >
           <FaPalette
             style={{
@@ -112,7 +117,10 @@ const Navbar = () => {
         </Box>
         <Box
           className={classes.box}
-          onClick={() => history.push("/admin/clock/home")}
+          onClick={() => {
+            history.push("/admin/clock/home");
+            dispatch(getClockReq());
+          }}
         >
           <FaBuffer
             style={{

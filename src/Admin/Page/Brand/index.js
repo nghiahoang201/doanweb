@@ -87,12 +87,14 @@ const Brand = () => {
     message: "",
   });
   useEffect(() => {
-    dispatch(getBrandReq());
+    if (!brands.length) {
+      dispatch(getBrandReq());
+    }
     if (id) {
       dispatch(getAnBrandReq(id));
     }
     return;
-  }, [dispatch, id]);
+  }, [dispatch, id, brands]);
   useEffect(() => {
     if (Object.keys(brand).length !== 0) {
       setValue(brand);
@@ -204,7 +206,7 @@ const Brand = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {brands?.map((item, index) => (
+                        {brands?.reverse()?.map((item, index) => (
                           <TableRow
                             sx={{
                               "&:last-child td, &:last-child th": { border: 0 },

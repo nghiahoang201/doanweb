@@ -99,15 +99,17 @@ const Clock = () => {
     message: "",
   });
   useEffect(() => {
-    dispatch(getBrandReq());
-    dispatch(getClockReq());
+    if (!brands.length) {
+      dispatch(getBrandReq());
+    } else if (!clocks.length) {
+      dispatch(getClockReq());
+    }
 
     if (id) {
       dispatch(getAnClockReq(id));
-      dispatch(getBrandReq());
     }
     return;
-  }, [dispatch, id]);
+  }, [dispatch, id, clocks, brands]);
   useEffect(() => {
     if (Object.keys(clock).length !== 0) {
       setValue(clock);
@@ -222,7 +224,7 @@ const Clock = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {clocks?.map((item, index) => (
+                        {clocks?.reverse()?.map((item, index) => (
                           <TableRow
                             sx={{
                               "&:last-child td, &:last-child th": { border: 0 },
