@@ -224,7 +224,7 @@ const Clock = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {clocks?.reverse()?.map((item, index) => (
+                        {clocks?.map((item, index) => (
                           <TableRow
                             sx={{
                               "&:last-child td, &:last-child th": { border: 0 },

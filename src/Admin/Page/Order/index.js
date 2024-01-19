@@ -244,7 +244,7 @@ const Order = () => {
                           <TableCell align="center">Action</TableCell>
                         </TableRow>
                       </TableHead>
-                      {customers?.reverse()?.map((item, index) => (
+                      {customers?.map((item, index) => (
                         <TableBody key={item?._id}>
                           <TableRow
                             sx={{

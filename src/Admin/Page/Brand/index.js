@@ -206,7 +206,7 @@ const Brand = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {brands?.reverse()?.map((item, index) => (
+                        {brands?.map((item, index) => (
                           <TableRow
                             sx={{
                               "&:last-child td, &:last-child th": { border: 0 },
